@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -11,6 +11,7 @@ import {
   ChevronUp,
   Sliders,
   AlertCircle,
+  AlertTriangle,
   TrendingUp,
   Info,
 } from 'lucide-react';
@@ -26,6 +27,51 @@ import { Field } from '@/components/ui/Field';
 import { Gauge } from '@/components/charts/Gauge';
 import { FactorBars } from '@/components/charts/FactorBars';
 
+function computeInputsHash(values: Record<string, any>, m: AcademicMode): string {
+  const primaryKeys = [
+    'subject',
+    'studytime',
+    'failures',
+    'absences',
+    'higher',
+    'schoolsup',
+    'school',
+    'sex',
+    'age',
+    'address',
+    'famsize',
+    'Pstatus',
+    'Medu',
+    'Fedu',
+    'Mjob',
+    'Fjob',
+    'reason',
+    'guardian',
+    'traveltime',
+    'famsup',
+    'paid',
+    'activities',
+    'nursery',
+    'internet',
+    'romantic',
+    'famrel',
+    'freetime',
+    'goout',
+    'Dalc',
+    'Walc',
+    'health',
+  ];
+  if (m === 'midterm') {
+    primaryKeys.push('G1', 'G2');
+  }
+  return primaryKeys
+    .map((k) => {
+      const v = values[k];
+      return `${k}:${v !== undefined && v !== null ? String(v).trim() : ''}`;
+    })
+    .join(';');
+}
+
 export const Predict: React.FC = () => {
   const { showToast } = useToast();
   const [mode, setMode] = useState<AcademicMode>('midterm');
@@ -33,7 +79,9 @@ export const Predict: React.FC = () => {
   const [meta, setMeta] = useState<SchemaMetadata | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PredictResponse | null>(null);
+  const [resultInputHash, setResultInputHash] = useState<string>('');
   const [basePrediction, setBasePrediction] = useState<number | null>(null);
+  const isSubmittingRef = useRef(false);
 
   // What-if simulator state
   const [simStudytime, setSimStudytime] = useState<number>(2);
@@ -54,6 +102,7 @@ export const Predict: React.FC = () => {
     watch,
     formState: { errors },
   } = useForm<PredictFormSchemaType>({
+    mode: 'onChange',
     resolver: zodResolver(predictFormSchema),
     defaultValues: {
       mode: 'midterm',
@@ -93,55 +142,27 @@ export const Predict: React.FC = () => {
     },
   });
 
+  const currentValues = watch();
+  const currentInputHash = result ? computeInputsHash(currentValues, result.mode) : '';
+  const isStale = Boolean(result && resultInputHash && currentInputHash !== resultInputHash);
+
   useEffect(() => {
     document.title = 'Student Grade Prediction | NextGrade AI';
 
     api.getMeta().then((res) => {
       setMeta(res);
     });
-
-    // Auto-predict default values on initial render
-    handleFormSubmit({
-      mode: 'midterm',
-      subject: 'math',
-      studytime: 2,
-      failures: 0,
-      absences: 4,
-      higher: 1,
-      schoolsup: 0,
-      G1: 11,
-      G2: 12,
-      school: 'GP',
-      sex: 'F',
-      age: 17,
-      address: 'U',
-      famsize: 'GT3',
-      Pstatus: 'T',
-      Medu: 2,
-      Fedu: 2,
-      Mjob: 'other',
-      Fjob: 'other',
-      reason: 'course',
-      guardian: 'mother',
-      traveltime: 1,
-      famsup: 1,
-      paid: 0,
-      activities: 1,
-      nursery: 1,
-      internet: 1,
-      romantic: 0,
-      famrel: 4,
-      freetime: 3,
-      goout: 3,
-      Dalc: 1,
-      Walc: 1,
-      health: 3,
-    });
   }, []);
 
   const handleModeChange = (newMode: AcademicMode) => {
-    setMode(newMode);
-    setValue('mode', newMode);
+    if (newMode !== mode) {
+      setMode(newMode);
+      setValue('mode', newMode);
+      setResult(null);
+      setResultInputHash('');
+      setBasePrediction(null);
+      setSimDelta(null);
+    }
   };
 
   const loadExample = (type: 'at_risk' | 'average' | 'high_achiever') => {
@@ -154,19 +175,21 @@ export const Predict: React.FC = () => {
     setSimAbsences(example.absences);
     setSimFailures(example.failures);
     handleFormSubmit(example as any);
-    showToast(`Loaded ${example.label || type} profile`, 'info');
   };
 
   const handleFormSubmit = async (values: PredictFormSchemaType) => {
+    if (loading || isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
     setLoading(true);
     try {
-      const payload = { ...values };
+      const payload: any = { ...values, save: true };
       if (mode === 'early') {
         delete payload.G1;
         delete payload.G2;
       }
       const resp = await api.predict(payload);
       setResult(resp);
+      setResultInputHash(computeInputsHash(values, resp.mode));
       setBasePrediction(resp.predicted_g3);
       setSimStudytime(values.studytime);
       setSimAbsences(values.absences);
@@ -177,6 +200,7 @@ export const Predict: React.FC = () => {
       showToast(err.message || 'Failed to generate prediction', 'error');
     } finally {
       setLoading(false);
+      isSubmittingRef.current = false;
     }
   };
 
@@ -185,25 +209,26 @@ export const Predict: React.FC = () => {
     if (!result || basePrediction === null) return;
 
     // Check if what-if parameters actually changed from base
-    const currentValues = watch();
+    const currentVals = watch();
     if (
-      debouncedSimStudy === currentValues.studytime &&
-      debouncedSimAbsences === currentValues.absences &&
-      debouncedSimFailures === currentValues.failures
+      debouncedSimStudy === currentVals.studytime &&
+      debouncedSimAbsences === currentVals.absences &&
+      debouncedSimFailures === currentVals.failures
     ) {
       setSimDelta(0);
       return;
     }
 
     setSimLoading(true);
-    const simPayload = {
-      ...currentValues,
-      mode,
+    const simPayload: any = {
+      ...currentVals,
+      mode: result.mode, // Use result's mode for consistency
       studytime: debouncedSimStudy,
       absences: debouncedSimAbsences,
       failures: debouncedSimFailures,
+      save: false, // What-if calls must not auto-save to history
     };
-    if (mode === 'early') {
+    if (result.mode === 'early') {
       delete simPayload.G1;
       delete simPayload.G2;
     }
@@ -216,7 +241,8 @@ export const Predict: React.FC = () => {
       })
       .catch((e) => console.error('Sim error', e))
       .finally(() => setSimLoading(false));
-  }, [debouncedSimStudy, debouncedSimAbsences, debouncedSimFailures, basePrediction, mode]);
+  }, [debouncedSimStudy, debouncedSimAbsences, debouncedSimFailures, basePrediction, result?.mode]);
+
 
   const copySummary = () => {
     if (!result) return;
@@ -563,10 +589,24 @@ export const Predict: React.FC = () => {
         </div>
 
         {/* Right Sticky Result Column (40% -> 5 cols) */}
-        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-[80px] lg:max-h-[calc(100vh-96px)] lg:overflow-y-auto pr-1">
           {result ? (
-            <Card accent={result.risk_level === 'High' ? 'danger' : result.risk_level === 'Medium' ? 'warning' : 'success'} className="p-6 space-y-6">
-              {/* Header Status */}
+            <Card
+              accent={result.risk_level === 'High' ? 'danger' : result.risk_level === 'Medium' ? 'warning' : 'success'}
+              className={`p-6 space-y-6 transition-opacity duration-200 ${isStale ? 'opacity-80' : ''}`}
+            >
+              {/* Stale Result Banner */}
+              {isStale && (
+                <div
+                  role="status"
+                  className="flex items-start gap-2.5 p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs font-semibold text-amber-900 animate-in fade-in duration-150"
+                >
+                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <span>Inputs changed since this prediction. Generate again to update.</span>
+                </div>
+              )}
+
+              {/* Header Status - always reads mode from result itself */}
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E9F2]">
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
@@ -586,17 +626,27 @@ export const Predict: React.FC = () => {
                 <Gauge value={result.predicted_g3} confidenceRange={result.confidence_range} />
               </div>
 
-              {/* Outcome Badge Row */}
-              <div className="flex items-center justify-between p-3.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs">
-                <div className="space-y-0.5">
-                  <div className="text-[#64748B] font-medium">Pass Probability</div>
-                  <div className="text-base font-extrabold text-[#0B2A4A] tabular-nums">
-                    {(result.pass_probability * 100).toFixed(0)}%
+              {/* Outcome Badge Row with Borderline Note */}
+              <div className="p-3.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <div className="text-[#64748B] font-medium">Pass Probability</div>
+                    <div className="text-base font-extrabold text-[#0B2A4A] tabular-nums">
+                      {Math.round(result.pass_probability * 100)}%
+                    </div>
                   </div>
+                  <Chip variant={result.predicted_pass ? 'pass' : 'fail'}>
+                    {result.predicted_pass ? 'Passing Expected' : 'Failing Expected'}
+                  </Chip>
                 </div>
-                <Chip variant={result.predicted_pass ? 'pass' : 'fail'}>
-                  {result.predicted_pass ? 'Passing Expected' : 'Failing Expected'}
-                </Chip>
+
+                {/* Borderline note or model disagreement */}
+                {result.borderline_note && (
+                  <div className="flex items-start gap-2 pt-2 border-t border-[#E2E8F0] text-[11px] text-amber-900 font-medium">
+                    <AlertCircle className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                    <span>{result.borderline_note}</span>
+                  </div>
+                )}
               </div>
 
               {/* Factor Contribution Bars */}
@@ -709,12 +759,16 @@ export const Predict: React.FC = () => {
               </p>
             </Card>
           ) : (
-            <Card className="p-8 text-center text-[#64748B]">
-              <Sparkles className="w-8 h-8 text-[#2563EB] mx-auto mb-2 opacity-50" />
-              <div className="text-sm font-semibold text-[#0B2A4A]">Ready to Predict</div>
-              <p className="text-xs mt-1">
-                Fill in student attributes and click Generate Prediction to see results.
-              </p>
+            <Card className="p-8 text-center text-[#64748B] space-y-3 border-dashed">
+              <div className="w-12 h-12 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#2563EB] mx-auto">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <div className="text-sm font-bold text-[#0B2A4A]">Your prediction will appear here</div>
+                <p className="text-xs text-[#64748B] max-w-xs mx-auto">
+                  Adjust student indicators on the left and click &quot;Generate Prediction&quot; to see the forecast, risk level, and explanations.
+                </p>
+              </div>
             </Card>
           )}
         </div>

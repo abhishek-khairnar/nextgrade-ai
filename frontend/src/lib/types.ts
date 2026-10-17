@@ -27,6 +27,10 @@ export interface PredictResponse {
   mode: AcademicMode;
   factors: FactorImpact[];
   suggestions: string[];
+  cv_rmse?: number;
+  is_borderline?: boolean;
+  model_disagreement?: boolean;
+  borderline_note?: string | null;
 }
 
 export interface PredictFormValues {
@@ -39,6 +43,7 @@ export interface PredictFormValues {
   schoolsup: number;
   G1?: number;
   G2?: number;
+  save?: boolean;
   school?: string;
   sex?: string;
   age?: number;
