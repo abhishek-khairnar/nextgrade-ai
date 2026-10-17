@@ -45,6 +45,7 @@ export const Home: React.FC = () => {
             G1: 14,
             G2: 15,
             label: 'Demo High-Trajectory Student',
+            save: false,
           }),
           api.getModelImportance('midterm'),
         ]);
@@ -66,17 +67,16 @@ export const Home: React.FC = () => {
     <div className="space-y-16 sm:space-y-24 py-8 sm:py-12">
       {/* 1. Hero Section */}
       <section className="max-w-[1200px] mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Hero Content (7 cols) */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] gap-12 lg:gap-14 items-center">
+          {/* Left Hero Content */}
+          <div className="space-y-6 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EEF2FF] border border-[#BFDBFE] text-xs font-semibold text-[#0B2A4A]">
               <Sparkles className="w-3.5 h-3.5 text-[#2563EB]" />
               <span>AI-Powered Academic Early Intervention</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0B2A4A] tracking-tight leading-[1.15]">
-              Predict the next grade,{' '}
-              <span className="text-[#2563EB]">while there is still time to help.</span>
+            <h1 className="text-[clamp(2.25rem,4.5vw,3.75rem)] font-extrabold text-[#0B2A4A] tracking-tight leading-[1.12]">
+              Predict the next grade, <span className="text-[#2563EB]">while there is still time to help.</span>
             </h1>
 
             <p className="text-base sm:text-lg text-[#64748B] max-w-xl mx-auto lg:mx-0 leading-relaxed">
@@ -99,8 +99,8 @@ export const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Live Result Preview Card (5 cols) */}
-          <div className="lg:col-span-5">
+          {/* Right Live Result Preview Card */}
+          <div className="w-full">
             {loading || !demoResult ? (
               <CardSkeleton lines={4} />
             ) : (
@@ -125,7 +125,7 @@ export const Home: React.FC = () => {
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-[#64748B] font-medium">Outcome Classification</span>
                     <Chip variant={demoResult.predicted_pass ? 'pass' : 'fail'} size="sm">
-                      {demoResult.predicted_pass ? 'Pass Expected' : 'At Risk'} ({(demoResult.pass_probability * 100).toFixed(0)}%)
+                      {demoResult.predicted_pass ? 'Pass Expected' : 'At Risk'} ({Math.round(demoResult.pass_probability * 100)}%)
                     </Chip>
                   </div>
 

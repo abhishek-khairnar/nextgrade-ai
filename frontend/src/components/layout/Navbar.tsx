@@ -39,41 +39,43 @@ export const Navbar: React.FC = () => {
           isScrolled ? 'shadow-nav border-b border-[#E5E9F2]' : 'border-b border-transparent'
         )}
       >
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
-          {/* Logo */}
-          <NavLink
-            to="/"
-            className="flex items-center gap-2.5 focus-ring rounded-lg py-1 px-1.5 -ml-1.5"
-            aria-label="NextGrade AI Home"
-          >
-            <div className="w-9 h-9 rounded-xl bg-[#0B2A4A] flex items-center justify-center relative shadow-sm">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#2563EB] absolute top-1 left-1" />
-              <svg
-                className="w-5 h-5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M7 17L17 7M17 7H9M17 7V15" />
-              </svg>
-            </div>
-            <span className="font-heading font-extrabold text-xl text-[#0B2A4A] tracking-tight">
-              NextGrade <span className="text-[#2563EB]">AI</span>
-            </span>
-          </NavLink>
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between lg:grid lg:grid-cols-[200px_1fr_200px] gap-4">
+          {/* Column 1: Logo */}
+          <div className="flex items-center justify-start">
+            <NavLink
+              to="/"
+              className="flex items-center gap-2.5 focus-ring rounded-lg py-1 px-1.5 -ml-1.5"
+              aria-label="NextGrade AI Home"
+            >
+              <div className="w-9 h-9 rounded-xl bg-[#0B2A4A] flex items-center justify-center relative shadow-sm shrink-0">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#2563EB] absolute top-1 left-1" />
+                <svg
+                  className="w-5 h-5 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M7 17L17 7M17 7H9M17 7V15" />
+                </svg>
+              </div>
+              <span className="font-heading font-extrabold text-xl text-[#0B2A4A] tracking-tight whitespace-nowrap">
+                NextGrade <span className="text-[#2563EB]">AI</span>
+              </span>
+            </NavLink>
+          </div>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-1.5" aria-label="Main Navigation">
+          {/* Column 2: Desktop Nav Links (Centered) */}
+          <nav className="hidden lg:flex items-center justify-center gap-1.5" aria-label="Main Navigation">
             {NAV_LINKS.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
                   clsx(
-                    'px-3.5 py-2 text-sm transition-all relative font-medium rounded-lg',
+                    'px-3.5 py-2 text-sm transition-all relative font-medium rounded-lg whitespace-nowrap',
                     isActive
                       ? 'text-[#0B2A4A] font-bold after:content-[""] after:absolute after:bottom-0 after:left-3.5 after:right-3.5 after:h-0.5 after:bg-[#2563EB]'
                       : 'text-[#64748B] hover:text-[#0B2A4A] hover:bg-[#EEF2FF]/60'
@@ -85,15 +87,15 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Right Action */}
-          <div className="flex items-center gap-3">
-            {!isPredictPage && (
-              <NavLink to="/predict" className="hidden sm:inline-flex">
+          {/* Column 3: Right Action Area (Fixed width reserved so links never shift) */}
+          <div className="flex items-center justify-end gap-3">
+            <div className={clsx('hidden sm:inline-flex', isPredictPage && 'invisible pointer-events-none')}>
+              <NavLink to="/predict" tabIndex={isPredictPage ? -1 : 0}>
                 <Button size="sm" leftIcon={<Sparkles className="w-3.5 h-3.5" />}>
                   Predict Now
                 </Button>
               </NavLink>
-            )}
+            </div>
 
             {/* Mobile Menu Hamburger */}
             <button
@@ -101,7 +103,7 @@ export const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open navigation menu"
               aria-expanded={mobileMenuOpen}
-              className="lg:hidden p-2 rounded-xl text-[#0B2A4A] hover:bg-[#EEF2FF] focus-ring"
+              className="lg:hidden p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-[#0B2A4A] hover:bg-[#EEF2FF] focus-ring"
             >
               <Menu className="w-6 h-6" />
             </button>
