@@ -113,8 +113,26 @@ class PredictorService:
             pass_prob = float(probs[1]) if len(probs) > 1 else 0.5
         else:
             pass_prob = 1.0 if pred_g3 >= 10.0 else 0.0
+
+        # Clip pass_probability strictly to range [0.01, 0.99]
+        pass_prob = float(np.clip(pass_prob, 0.01, 0.99))
             
         pred_pass = 1 if pred_g3 >= 10.0 or pass_prob >= 0.5 else 0
+
+        # Borderline evaluation against CV RMSE
+        cv_rmse = 3.079 if mode == "early" else 1.588
+        abs_diff_10 = abs(pred_g3 - 10.0)
+        is_borderline = abs_diff_10 <= cv_rmse
+
+        reg_says_pass = pred_g3 >= 10.0
+        clf_says_pass = pass_prob >= 0.50
+        model_disagreement = (reg_says_pass != clf_says_pass)
+
+        borderline_note = None
+        if model_disagreement:
+            borderline_note = "The two models disagree. Treat this as borderline."
+        elif is_borderline:
+            borderline_note = "Borderline - close to the pass mark"
 
         # Risk level determination
         if pred_g3 < 10.0:
@@ -201,7 +219,11 @@ class PredictorService:
             risk_label=risk_label,
             mode=mode,
             factors=top_factors,
-            suggestions=suggestions[:4]
+            suggestions=suggestions[:4],
+            cv_rmse=cv_rmse,
+            is_borderline=is_borderline,
+            model_disagreement=model_disagreement,
+            borderline_note=borderline_note
         )
 
         factors_raw = [f.model_dump() for f in top_factors]

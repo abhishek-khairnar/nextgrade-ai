@@ -49,6 +49,7 @@ class PredictRequest(BaseModel):
     Walc: Optional[int] = Field(default=1, ge=1, le=5)
     health: Optional[int] = Field(default=3, ge=1, le=5)
     label: Optional[str] = None
+    save: bool = Field(default=True, description="Whether to auto-save this prediction in History")
 
     @model_validator(mode="after")
     def validate_mode_requirements(self):
@@ -73,6 +74,10 @@ class PredictResponse(BaseModel):
     mode: str
     factors: List[FactorImpact]
     suggestions: List[str]
+    cv_rmse: float = 1.588
+    is_borderline: bool = False
+    model_disagreement: bool = False
+    borderline_note: Optional[str] = None
 
 class BatchValidationItem(BaseModel):
     row: int
