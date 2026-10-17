@@ -4,9 +4,8 @@ import { ExternalLink } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const repoUrl = import.meta.env.VITE_REPO_URL;
-  const apiUrl = import.meta.env.VITE_API_URL || '';
-  const apiDocsUrl = `${apiUrl}/docs`;
+  const repoUrl = import.meta.env.VITE_REPO_URL || 'https://github.com/abhishek-khairnar/nextgrade-ai';
+  const apiDocsUrl = import.meta.env.VITE_API_DOCS_URL || 'http://127.0.0.1:8000/docs';
 
   return (
     <footer className="bg-white border-t border-[#E5E9F2] text-sm text-[#64748B] mt-auto">
