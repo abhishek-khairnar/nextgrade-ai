@@ -1,0 +1,319 @@
+{
+  "features": {
+    "school": {
+      "type": "categorical",
+      "options": [
+        "GP",
+        "MS"
+      ],
+      "default": "GP"
+    },
+    "sex": {
+      "type": "categorical",
+      "options": [
+        "F",
+        "M"
+      ],
+      "default": "F"
+    },
+    "age": {
+      "type": "numeric",
+      "min": 15.0,
+      "max": 22.0,
+      "default": 17.0
+    },
+    "address": {
+      "type": "categorical",
+      "options": [
+        "R",
+        "U"
+      ],
+      "default": "U"
+    },
+    "famsize": {
+      "type": "categorical",
+      "options": [
+        "GT3",
+        "LE3"
+      ],
+      "default": "GT3"
+    },
+    "Pstatus": {
+      "type": "categorical",
+      "options": [
+        "A",
+        "T"
+      ],
+      "default": "T"
+    },
+    "Medu": {
+      "type": "numeric",
+      "min": 0.0,
+      "max": 4.0,
+      "default": 3.0
+    },
+    "Fedu": {
+      "type": "numeric",
+      "min": 0.0,
+      "max": 4.0,
+      "default": 2.0
+    },
+    "Mjob": {
+      "type": "categorical",
+      "options": [
+        "at_home",
+        "health",
+        "other",
+        "services",
+        "teacher"
+      ],
+      "default": "other"
+    },
+    "Fjob": {
+      "type": "categorical",
+      "options": [
+        "at_home",
+        "health",
+        "other",
+        "services",
+        "teacher"
+      ],
+      "default": "other"
+    },
+    "reason": {
+      "type": "categorical",
+      "options": [
+        "course",
+        "home",
+        "other",
+        "reputation"
+      ],
+      "default": "course"
+    },
+    "guardian": {
+      "type": "categorical",
+      "options": [
+        "father",
+        "mother",
+        "other"
+      ],
+      "default": "mother"
+    },
+    "traveltime": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 4.0,
+      "default": 1.0
+    },
+    "studytime": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 4.0,
+      "default": 2.0
+    },
+    "failures": {
+      "type": "numeric",
+      "min": 0.0,
+      "max": 3.0,
+      "default": 0.0
+    },
+    "schoolsup": {
+      "type": "binary",
+      "options": [
+        0,
+        1
+      ],
+      "default": 0
+    },
+    "famsup": {
+      "type": "binary",
+      "options": [
+        0,
+        1
+      ],
+      "default": 1
+    },
+    "paid": {
+      "type": "binary",
+      "options": [
+        0,
+        1
+      ],
+      "default": 0
+    },
+    "activities": {
+      "type": "binary",
+      "options": [
+        0,
+        1
+      ],
+      "default": 0
+    },
+    "nursery": {
+      "type": "binary",
+      "options": [
+        0,
+        1
+      ],
+      "default": 1
+    },
+    "higher": {
+      "type": "binary",
+      "options": [
+        0,
+        1
+      ],
+      "default": 1
+    },
+    "internet": {
+      "type": "binary",
+      "options": [
+        0,
+        1
+      ],
+      "default": 1
+    },
+    "romantic": {
+      "type": "binary",
+      "options": [
+        0,
+        1
+      ],
+      "default": 0
+    },
+    "famrel": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 5.0,
+      "default": 4.0
+    },
+    "freetime": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 5.0,
+      "default": 3.0
+    },
+    "goout": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 5.0,
+      "default": 3.0
+    },
+    "Dalc": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 5.0,
+      "default": 1.0
+    },
+    "Walc": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 5.0,
+      "default": 2.0
+    },
+    "health": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 5.0,
+      "default": 4.0
+    },
+    "absences": {
+      "type": "numeric",
+      "min": 0.0,
+      "max": 75.0,
+      "default": 2.0
+    },
+    "G1": {
+      "type": "numeric",
+      "min": 0.0,
+      "max": 19.0,
+      "default": 11.0
+    },
+    "G2": {
+      "type": "numeric",
+      "min": 0.0,
+      "max": 19.0,
+      "default": 11.0
+    },
+    "subject": {
+      "type": "categorical",
+      "options": [
+        "math",
+        "portuguese"
+      ],
+      "default": "portuguese"
+    },
+    "parent_edu_avg": {
+      "type": "numeric",
+      "min": 0.0,
+      "max": 4.0,
+      "default": 2.5
+    },
+    "alcohol_avg": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 5.0,
+      "default": 1.29
+    },
+    "social_score": {
+      "type": "numeric",
+      "min": 1.0,
+      "max": 5.0,
+      "default": 3.0
+    },
+    "grade_trend": {
+      "type": "numeric",
+      "min": -12.0,
+      "max": 11.0,
+      "default": 0.0
+    }
+  },
+  "defaults": {
+    "school": "GP",
+    "sex": "F",
+    "age": 17.0,
+    "address": "U",
+    "famsize": "GT3",
+    "Pstatus": "T",
+    "Medu": 3.0,
+    "Fedu": 2.0,
+    "Mjob": "other",
+    "Fjob": "other",
+    "reason": "course",
+    "guardian": "mother",
+    "traveltime": 1.0,
+    "studytime": 2.0,
+    "failures": 0.0,
+    "schoolsup": 0,
+    "famsup": 1,
+    "paid": 0,
+    "activities": 0,
+    "nursery": 1,
+    "higher": 1,
+    "internet": 1,
+    "romantic": 0,
+    "famrel": 4.0,
+    "freetime": 3.0,
+    "goout": 3.0,
+    "Dalc": 1.0,
+    "Walc": 2.0,
+    "health": 4.0,
+    "absences": 2.0,
+    "G1": 11.0,
+    "G2": 11.0,
+    "subject": "portuguese",
+    "parent_edu_avg": 2.5,
+    "alcohol_avg": 1.29,
+    "social_score": 3.0,
+    "grade_trend": 0.0
+  },
+  "target": {
+    "name": "G3",
+    "min": 0,
+    "max": 20
+  },
+  "pass_target": {
+    "name": "pass",
+    "threshold": 10
+  }
+}

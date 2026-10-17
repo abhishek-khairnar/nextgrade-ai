@@ -1,0 +1,1408 @@
+{
+  "early": {
+    "scatter": [
+      {
+        "actual": 14.0,
+        "predicted": 10.0,
+        "residual": 4.0
+      },
+      {
+        "actual": 13.0,
+        "predicted": 13.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 10.0,
+        "predicted": 4.3,
+        "residual": 5.7
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.7,
+        "residual": -0.7
+      },
+      {
+        "actual": 16.0,
+        "predicted": 13.5,
+        "residual": 2.5
+      },
+      {
+        "actual": 16.0,
+        "predicted": 12.4,
+        "residual": 3.6
+      },
+      {
+        "actual": 13.0,
+        "predicted": 14.2,
+        "residual": -1.2
+      },
+      {
+        "actual": 10.0,
+        "predicted": 10.9,
+        "residual": -0.9
+      },
+      {
+        "actual": 7.0,
+        "predicted": 10.4,
+        "residual": -3.4
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.0,
+        "residual": -0.0
+      },
+      {
+        "actual": 11.0,
+        "predicted": 13.1,
+        "residual": -2.1
+      },
+      {
+        "actual": 20.0,
+        "predicted": 14.7,
+        "residual": 5.3
+      },
+      {
+        "actual": 16.0,
+        "predicted": 13.1,
+        "residual": 2.9
+      },
+      {
+        "actual": 7.0,
+        "predicted": 10.0,
+        "residual": -3.0
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.4,
+        "residual": -0.4
+      },
+      {
+        "actual": 10.0,
+        "predicted": 11.5,
+        "residual": -1.5
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.7,
+        "residual": -0.7
+      },
+      {
+        "actual": 10.0,
+        "predicted": 10.8,
+        "residual": -0.8
+      },
+      {
+        "actual": 10.0,
+        "predicted": 11.0,
+        "residual": -1.0
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.6,
+        "residual": -0.6
+      },
+      {
+        "actual": 7.0,
+        "predicted": 8.9,
+        "residual": -1.9
+      },
+      {
+        "actual": 12.0,
+        "predicted": 13.6,
+        "residual": -1.6
+      },
+      {
+        "actual": 10.0,
+        "predicted": 4.7,
+        "residual": 5.3
+      },
+      {
+        "actual": 13.0,
+        "predicted": 12.6,
+        "residual": 0.4
+      },
+      {
+        "actual": 16.0,
+        "predicted": 13.5,
+        "residual": 2.5
+      },
+      {
+        "actual": 14.0,
+        "predicted": 11.7,
+        "residual": 2.3
+      },
+      {
+        "actual": 10.0,
+        "predicted": 10.9,
+        "residual": -0.9
+      },
+      {
+        "actual": 16.0,
+        "predicted": 13.8,
+        "residual": 2.2
+      },
+      {
+        "actual": 13.0,
+        "predicted": 10.5,
+        "residual": 2.5
+      },
+      {
+        "actual": 10.0,
+        "predicted": 12.1,
+        "residual": -2.1
+      },
+      {
+        "actual": 14.0,
+        "predicted": 10.1,
+        "residual": 3.9
+      },
+      {
+        "actual": 13.0,
+        "predicted": 12.4,
+        "residual": 0.6
+      },
+      {
+        "actual": 12.0,
+        "predicted": 5.5,
+        "residual": 6.5
+      },
+      {
+        "actual": 0.0,
+        "predicted": 9.7,
+        "residual": -9.7
+      },
+      {
+        "actual": 10.0,
+        "predicted": 9.2,
+        "residual": 0.8
+      },
+      {
+        "actual": 18.0,
+        "predicted": 13.9,
+        "residual": 4.1
+      },
+      {
+        "actual": 13.0,
+        "predicted": 13.4,
+        "residual": -0.4
+      },
+      {
+        "actual": 17.0,
+        "predicted": 13.2,
+        "residual": 3.8
+      },
+      {
+        "actual": 11.0,
+        "predicted": 12.6,
+        "residual": -1.6
+      },
+      {
+        "actual": 15.0,
+        "predicted": 13.0,
+        "residual": 2.0
+      },
+      {
+        "actual": 11.0,
+        "predicted": 9.6,
+        "residual": 1.4
+      },
+      {
+        "actual": 11.0,
+        "predicted": 12.4,
+        "residual": -1.4
+      },
+      {
+        "actual": 15.0,
+        "predicted": 10.9,
+        "residual": 4.1
+      },
+      {
+        "actual": 12.0,
+        "predicted": 13.1,
+        "residual": -1.1
+      },
+      {
+        "actual": 9.0,
+        "predicted": 12.7,
+        "residual": -3.7
+      },
+      {
+        "actual": 10.0,
+        "predicted": 13.1,
+        "residual": -3.1
+      },
+      {
+        "actual": 14.0,
+        "predicted": 11.9,
+        "residual": 2.1
+      },
+      {
+        "actual": 10.0,
+        "predicted": 13.9,
+        "residual": -3.9
+      },
+      {
+        "actual": 13.0,
+        "predicted": 12.6,
+        "residual": 0.4
+      },
+      {
+        "actual": 0.0,
+        "predicted": 3.0,
+        "residual": -3.0
+      },
+      {
+        "actual": 16.0,
+        "predicted": 13.7,
+        "residual": 2.3
+      },
+      {
+        "actual": 14.0,
+        "predicted": 11.6,
+        "residual": 2.4
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.6,
+        "residual": -0.6
+      },
+      {
+        "actual": 8.0,
+        "predicted": 8.0,
+        "residual": -0.0
+      },
+      {
+        "actual": 10.0,
+        "predicted": 9.8,
+        "residual": 0.2
+      },
+      {
+        "actual": 12.0,
+        "predicted": 11.3,
+        "residual": 0.7
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 12.0,
+        "predicted": 14.8,
+        "residual": -2.8
+      },
+      {
+        "actual": 10.0,
+        "predicted": 10.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 14.0,
+        "predicted": 12.3,
+        "residual": 1.7
+      },
+      {
+        "actual": 17.0,
+        "predicted": 15.9,
+        "residual": 1.1
+      },
+      {
+        "actual": 8.0,
+        "predicted": 10.8,
+        "residual": -2.8
+      },
+      {
+        "actual": 12.0,
+        "predicted": 11.6,
+        "residual": 0.4
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.1,
+        "residual": -0.1
+      },
+      {
+        "actual": 7.0,
+        "predicted": 2.9,
+        "residual": 4.1
+      },
+      {
+        "actual": 11.0,
+        "predicted": 10.0,
+        "residual": 1.0
+      },
+      {
+        "actual": 7.0,
+        "predicted": 10.2,
+        "residual": -3.2
+      },
+      {
+        "actual": 11.0,
+        "predicted": 12.7,
+        "residual": -1.7
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.4,
+        "residual": -0.4
+      },
+      {
+        "actual": 12.0,
+        "predicted": 11.6,
+        "residual": 0.4
+      },
+      {
+        "actual": 10.0,
+        "predicted": 1.3,
+        "residual": 8.7
+      },
+      {
+        "actual": 8.0,
+        "predicted": 14.4,
+        "residual": -6.4
+      },
+      {
+        "actual": 15.0,
+        "predicted": 12.6,
+        "residual": 2.4
+      },
+      {
+        "actual": 18.0,
+        "predicted": 14.4,
+        "residual": 3.6
+      },
+      {
+        "actual": 15.0,
+        "predicted": 13.0,
+        "residual": 2.0
+      },
+      {
+        "actual": 10.0,
+        "predicted": 10.3,
+        "residual": -0.3
+      },
+      {
+        "actual": 15.0,
+        "predicted": 11.8,
+        "residual": 3.2
+      },
+      {
+        "actual": 15.0,
+        "predicted": 12.6,
+        "residual": 2.4
+      },
+      {
+        "actual": 11.0,
+        "predicted": 13.1,
+        "residual": -2.1
+      },
+      {
+        "actual": 14.0,
+        "predicted": 12.0,
+        "residual": 2.0
+      },
+      {
+        "actual": 6.0,
+        "predicted": 11.1,
+        "residual": -5.1
+      },
+      {
+        "actual": 14.0,
+        "predicted": 10.8,
+        "residual": 3.2
+      },
+      {
+        "actual": 19.0,
+        "predicted": 10.5,
+        "residual": 8.5
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.2,
+        "residual": -0.2
+      },
+      {
+        "actual": 16.0,
+        "predicted": 13.5,
+        "residual": 2.5
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.2,
+        "residual": -0.2
+      },
+      {
+        "actual": 15.0,
+        "predicted": 11.0,
+        "residual": 4.0
+      },
+      {
+        "actual": 16.0,
+        "predicted": 12.3,
+        "residual": 3.7
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.1,
+        "residual": -0.1
+      },
+      {
+        "actual": 11.0,
+        "predicted": 9.7,
+        "residual": 1.3
+      },
+      {
+        "actual": 15.0,
+        "predicted": 13.8,
+        "residual": 1.2
+      },
+      {
+        "actual": 15.0,
+        "predicted": 13.3,
+        "residual": 1.7
+      },
+      {
+        "actual": 10.0,
+        "predicted": 11.6,
+        "residual": -1.6
+      },
+      {
+        "actual": 8.0,
+        "predicted": 11.9,
+        "residual": -3.9
+      },
+      {
+        "actual": 17.0,
+        "predicted": 13.6,
+        "residual": 3.4
+      },
+      {
+        "actual": 10.0,
+        "predicted": 14.0,
+        "residual": -4.0
+      },
+      {
+        "actual": 8.0,
+        "predicted": 11.0,
+        "residual": -3.0
+      },
+      {
+        "actual": 13.0,
+        "predicted": 12.7,
+        "residual": 0.3
+      },
+      {
+        "actual": 0.0,
+        "predicted": 12.9,
+        "residual": -12.9
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.2,
+        "residual": -0.2
+      }
+    ],
+    "residuals": [
+      {
+        "bin": "-7.5 to -6.5",
+        "count": 1,
+        "center": -7.0
+      },
+      {
+        "bin": "-6.5 to -5.5",
+        "count": 1,
+        "center": -6.0
+      },
+      {
+        "bin": "-5.5 to -4.5",
+        "count": 5,
+        "center": -5.0
+      },
+      {
+        "bin": "-4.5 to -3.5",
+        "count": 10,
+        "center": -4.0
+      },
+      {
+        "bin": "-3.5 to -2.5",
+        "count": 16,
+        "center": -3.0
+      },
+      {
+        "bin": "-2.5 to -1.5",
+        "count": 22,
+        "center": -2.0
+      },
+      {
+        "bin": "-1.5 to -0.5",
+        "count": 25,
+        "center": -1.0
+      },
+      {
+        "bin": "-0.5 to 0.5",
+        "count": 33,
+        "center": 0.0
+      },
+      {
+        "bin": "0.5 to 1.5",
+        "count": 30,
+        "center": 1.0
+      },
+      {
+        "bin": "1.5 to 2.5",
+        "count": 20,
+        "center": 2.0
+      },
+      {
+        "bin": "2.5 to 3.5",
+        "count": 15,
+        "center": 3.0
+      },
+      {
+        "bin": "3.5 to 4.5",
+        "count": 15,
+        "center": 4.0
+      },
+      {
+        "bin": "4.5 to 5.5",
+        "count": 3,
+        "center": 5.0
+      },
+      {
+        "bin": "5.5 to 6.5",
+        "count": 1,
+        "center": 6.0
+      },
+      {
+        "bin": "6.5 to 7.5",
+        "count": 3,
+        "center": 7.0
+      }
+    ],
+    "confusion_matrix": {
+      "tn": 7,
+      "fp": 39,
+      "fn": 5,
+      "tp": 158,
+      "total": 209
+    },
+    "roc_curve": [
+      {
+        "fpr": 0.0,
+        "tpr": 0.0
+      },
+      {
+        "fpr": 0.0,
+        "tpr": 0.031
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.196
+      },
+      {
+        "fpr": 0.043,
+        "tpr": 0.245
+      },
+      {
+        "fpr": 0.065,
+        "tpr": 0.344
+      },
+      {
+        "fpr": 0.087,
+        "tpr": 0.485
+      },
+      {
+        "fpr": 0.109,
+        "tpr": 0.534
+      },
+      {
+        "fpr": 0.13,
+        "tpr": 0.564
+      },
+      {
+        "fpr": 0.152,
+        "tpr": 0.589
+      },
+      {
+        "fpr": 0.196,
+        "tpr": 0.62
+      },
+      {
+        "fpr": 0.239,
+        "tpr": 0.663
+      },
+      {
+        "fpr": 0.261,
+        "tpr": 0.675
+      },
+      {
+        "fpr": 0.283,
+        "tpr": 0.681
+      },
+      {
+        "fpr": 0.304,
+        "tpr": 0.693
+      },
+      {
+        "fpr": 0.348,
+        "tpr": 0.718
+      },
+      {
+        "fpr": 0.391,
+        "tpr": 0.724
+      },
+      {
+        "fpr": 0.413,
+        "tpr": 0.73
+      },
+      {
+        "fpr": 0.457,
+        "tpr": 0.742
+      },
+      {
+        "fpr": 0.478,
+        "tpr": 0.761
+      },
+      {
+        "fpr": 0.5,
+        "tpr": 0.798
+      },
+      {
+        "fpr": 0.522,
+        "tpr": 0.816
+      },
+      {
+        "fpr": 0.565,
+        "tpr": 0.859
+      },
+      {
+        "fpr": 0.63,
+        "tpr": 0.92
+      },
+      {
+        "fpr": 0.674,
+        "tpr": 0.945
+      },
+      {
+        "fpr": 0.717,
+        "tpr": 0.951
+      },
+      {
+        "fpr": 0.739,
+        "tpr": 0.963
+      },
+      {
+        "fpr": 0.848,
+        "tpr": 0.988
+      },
+      {
+        "fpr": 0.913,
+        "tpr": 1.0
+      },
+      {
+        "fpr": 1.0,
+        "tpr": 1.0
+      }
+    ],
+    "test_size": 209
+  },
+  "midterm": {
+    "scatter": [
+      {
+        "actual": 14.0,
+        "predicted": 13.8,
+        "residual": 0.2
+      },
+      {
+        "actual": 13.0,
+        "predicted": 12.3,
+        "residual": 0.7
+      },
+      {
+        "actual": 10.0,
+        "predicted": 8.5,
+        "residual": 1.5
+      },
+      {
+        "actual": 11.0,
+        "predicted": 9.2,
+        "residual": 1.8
+      },
+      {
+        "actual": 16.0,
+        "predicted": 16.4,
+        "residual": -0.4
+      },
+      {
+        "actual": 16.0,
+        "predicted": 17.2,
+        "residual": -1.2
+      },
+      {
+        "actual": 13.0,
+        "predicted": 14.0,
+        "residual": -1.0
+      },
+      {
+        "actual": 10.0,
+        "predicted": 9.4,
+        "residual": 0.6
+      },
+      {
+        "actual": 7.0,
+        "predicted": 8.3,
+        "residual": -1.3
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.1,
+        "residual": -0.1
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.4,
+        "residual": -0.4
+      },
+      {
+        "actual": 20.0,
+        "predicted": 19.0,
+        "residual": 1.0
+      },
+      {
+        "actual": 16.0,
+        "predicted": 14.3,
+        "residual": 1.7
+      },
+      {
+        "actual": 7.0,
+        "predicted": 7.7,
+        "residual": -0.7
+      },
+      {
+        "actual": 11.0,
+        "predicted": 7.6,
+        "residual": 3.4
+      },
+      {
+        "actual": 10.0,
+        "predicted": 10.8,
+        "residual": -0.8
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.4,
+        "residual": -0.4
+      },
+      {
+        "actual": 10.0,
+        "predicted": 11.2,
+        "residual": -1.2
+      },
+      {
+        "actual": 10.0,
+        "predicted": 9.1,
+        "residual": 0.9
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.6,
+        "residual": -0.6
+      },
+      {
+        "actual": 7.0,
+        "predicted": 7.6,
+        "residual": -0.6
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.4,
+        "residual": -0.4
+      },
+      {
+        "actual": 10.0,
+        "predicted": 8.4,
+        "residual": 1.6
+      },
+      {
+        "actual": 13.0,
+        "predicted": 13.0,
+        "residual": 0.0
+      },
+      {
+        "actual": 16.0,
+        "predicted": 15.1,
+        "residual": 0.9
+      },
+      {
+        "actual": 14.0,
+        "predicted": 14.9,
+        "residual": -0.9
+      },
+      {
+        "actual": 10.0,
+        "predicted": 8.5,
+        "residual": 1.5
+      },
+      {
+        "actual": 16.0,
+        "predicted": 15.9,
+        "residual": 0.1
+      },
+      {
+        "actual": 13.0,
+        "predicted": 13.0,
+        "residual": -0.0
+      },
+      {
+        "actual": 10.0,
+        "predicted": 12.0,
+        "residual": -2.0
+      },
+      {
+        "actual": 14.0,
+        "predicted": 13.3,
+        "residual": 0.7
+      },
+      {
+        "actual": 13.0,
+        "predicted": 14.0,
+        "residual": -1.0
+      },
+      {
+        "actual": 12.0,
+        "predicted": 11.3,
+        "residual": 0.7
+      },
+      {
+        "actual": 0.0,
+        "predicted": 0.4,
+        "residual": -0.4
+      },
+      {
+        "actual": 10.0,
+        "predicted": 9.9,
+        "residual": 0.1
+      },
+      {
+        "actual": 18.0,
+        "predicted": 18.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 13.0,
+        "predicted": 14.2,
+        "residual": -1.2
+      },
+      {
+        "actual": 17.0,
+        "predicted": 18.0,
+        "residual": -1.0
+      },
+      {
+        "actual": 11.0,
+        "predicted": 12.0,
+        "residual": -1.0
+      },
+      {
+        "actual": 15.0,
+        "predicted": 13.5,
+        "residual": 1.5
+      },
+      {
+        "actual": 11.0,
+        "predicted": 10.7,
+        "residual": 0.3
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.2,
+        "residual": -0.2
+      },
+      {
+        "actual": 15.0,
+        "predicted": 15.7,
+        "residual": -0.7
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.3,
+        "residual": -0.3
+      },
+      {
+        "actual": 9.0,
+        "predicted": 8.4,
+        "residual": 0.6
+      },
+      {
+        "actual": 10.0,
+        "predicted": 9.9,
+        "residual": 0.1
+      },
+      {
+        "actual": 14.0,
+        "predicted": 14.1,
+        "residual": -0.1
+      },
+      {
+        "actual": 10.0,
+        "predicted": 11.1,
+        "residual": -1.1
+      },
+      {
+        "actual": 13.0,
+        "predicted": 13.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 0.0,
+        "predicted": 4.0,
+        "residual": -4.0
+      },
+      {
+        "actual": 16.0,
+        "predicted": 16.3,
+        "residual": -0.3
+      },
+      {
+        "actual": 14.0,
+        "predicted": 13.6,
+        "residual": 0.4
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.2,
+        "residual": -0.2
+      },
+      {
+        "actual": 8.0,
+        "predicted": 4.9,
+        "residual": 3.1
+      },
+      {
+        "actual": 10.0,
+        "predicted": 9.5,
+        "residual": 0.5
+      },
+      {
+        "actual": 12.0,
+        "predicted": 13.9,
+        "residual": -1.9
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.9,
+        "residual": -0.9
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 10.0,
+        "predicted": 8.6,
+        "residual": 1.4
+      },
+      {
+        "actual": 14.0,
+        "predicted": 13.7,
+        "residual": 0.3
+      },
+      {
+        "actual": 17.0,
+        "predicted": 17.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 8.0,
+        "predicted": 7.5,
+        "residual": 0.5
+      },
+      {
+        "actual": 12.0,
+        "predicted": 10.6,
+        "residual": 1.4
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.1,
+        "residual": -0.1
+      },
+      {
+        "actual": 7.0,
+        "predicted": 6.2,
+        "residual": 0.8
+      },
+      {
+        "actual": 11.0,
+        "predicted": 10.9,
+        "residual": 0.1
+      },
+      {
+        "actual": 7.0,
+        "predicted": 7.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 11.0,
+        "predicted": 10.0,
+        "residual": 1.0
+      },
+      {
+        "actual": 12.0,
+        "predicted": 11.3,
+        "residual": 0.7
+      },
+      {
+        "actual": 12.0,
+        "predicted": 9.7,
+        "residual": 2.3
+      },
+      {
+        "actual": 10.0,
+        "predicted": 8.3,
+        "residual": 1.7
+      },
+      {
+        "actual": 8.0,
+        "predicted": 8.5,
+        "residual": -0.5
+      },
+      {
+        "actual": 15.0,
+        "predicted": 15.7,
+        "residual": -0.7
+      },
+      {
+        "actual": 18.0,
+        "predicted": 19.0,
+        "residual": -1.0
+      },
+      {
+        "actual": 15.0,
+        "predicted": 13.1,
+        "residual": 1.9
+      },
+      {
+        "actual": 10.0,
+        "predicted": 8.7,
+        "residual": 1.3
+      },
+      {
+        "actual": 15.0,
+        "predicted": 15.1,
+        "residual": -0.1
+      },
+      {
+        "actual": 15.0,
+        "predicted": 14.6,
+        "residual": 0.4
+      },
+      {
+        "actual": 11.0,
+        "predicted": 9.6,
+        "residual": 1.4
+      },
+      {
+        "actual": 14.0,
+        "predicted": 13.8,
+        "residual": 0.2
+      },
+      {
+        "actual": 6.0,
+        "predicted": 6.1,
+        "residual": -0.1
+      },
+      {
+        "actual": 14.0,
+        "predicted": 13.9,
+        "residual": 0.1
+      },
+      {
+        "actual": 19.0,
+        "predicted": 18.3,
+        "residual": 0.7
+      },
+      {
+        "actual": 12.0,
+        "predicted": 11.3,
+        "residual": 0.7
+      },
+      {
+        "actual": 16.0,
+        "predicted": 15.6,
+        "residual": 0.4
+      },
+      {
+        "actual": 12.0,
+        "predicted": 11.0,
+        "residual": 1.0
+      },
+      {
+        "actual": 15.0,
+        "predicted": 15.0,
+        "residual": 0.0
+      },
+      {
+        "actual": 16.0,
+        "predicted": 15.1,
+        "residual": 0.9
+      },
+      {
+        "actual": 12.0,
+        "predicted": 12.2,
+        "residual": -0.2
+      },
+      {
+        "actual": 11.0,
+        "predicted": 11.0,
+        "residual": 0.0
+      },
+      {
+        "actual": 15.0,
+        "predicted": 14.6,
+        "residual": 0.4
+      },
+      {
+        "actual": 15.0,
+        "predicted": 14.5,
+        "residual": 0.5
+      },
+      {
+        "actual": 10.0,
+        "predicted": 9.5,
+        "residual": 0.5
+      },
+      {
+        "actual": 8.0,
+        "predicted": 7.7,
+        "residual": 0.3
+      },
+      {
+        "actual": 17.0,
+        "predicted": 18.5,
+        "residual": -1.5
+      },
+      {
+        "actual": 10.0,
+        "predicted": 10.1,
+        "residual": -0.1
+      },
+      {
+        "actual": 8.0,
+        "predicted": 9.3,
+        "residual": -1.3
+      },
+      {
+        "actual": 13.0,
+        "predicted": 12.7,
+        "residual": 0.3
+      },
+      {
+        "actual": 0.0,
+        "predicted": 0.0,
+        "residual": 0.0
+      },
+      {
+        "actual": 12.0,
+        "predicted": 13.0,
+        "residual": -1.0
+      }
+    ],
+    "residuals": [
+      {
+        "bin": "-7.5 to -6.5",
+        "count": 3,
+        "center": -7.0
+      },
+      {
+        "bin": "-6.5 to -5.5",
+        "count": 1,
+        "center": -6.0
+      },
+      {
+        "bin": "-5.5 to -4.5",
+        "count": 1,
+        "center": -5.0
+      },
+      {
+        "bin": "-4.5 to -3.5",
+        "count": 2,
+        "center": -4.0
+      },
+      {
+        "bin": "-3.5 to -2.5",
+        "count": 1,
+        "center": -3.0
+      },
+      {
+        "bin": "-2.5 to -1.5",
+        "count": 3,
+        "center": -2.0
+      },
+      {
+        "bin": "-1.5 to -0.5",
+        "count": 52,
+        "center": -1.0
+      },
+      {
+        "bin": "-0.5 to 0.5",
+        "count": 77,
+        "center": 0.0
+      },
+      {
+        "bin": "0.5 to 1.5",
+        "count": 50,
+        "center": 1.0
+      },
+      {
+        "bin": "1.5 to 2.5",
+        "count": 15,
+        "center": 2.0
+      },
+      {
+        "bin": "2.5 to 3.5",
+        "count": 3,
+        "center": 3.0
+      },
+      {
+        "bin": "3.5 to 4.5",
+        "count": 0,
+        "center": 4.0
+      },
+      {
+        "bin": "4.5 to 5.5",
+        "count": 0,
+        "center": 5.0
+      },
+      {
+        "bin": "5.5 to 6.5",
+        "count": 0,
+        "center": 6.0
+      },
+      {
+        "bin": "6.5 to 7.5",
+        "count": 0,
+        "center": 7.0
+      }
+    ],
+    "confusion_matrix": {
+      "tn": 38,
+      "fp": 8,
+      "fn": 9,
+      "tp": 154,
+      "total": 209
+    },
+    "roc_curve": [
+      {
+        "fpr": 0.0,
+        "tpr": 0.0
+      },
+      {
+        "fpr": 0.0,
+        "tpr": 0.043
+      },
+      {
+        "fpr": 0.0,
+        "tpr": 0.061
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.123
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.141
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.19
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.221
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.301
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.362
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.405
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.436
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.485
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.515
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.564
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.613
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.656
+      },
+      {
+        "fpr": 0.022,
+        "tpr": 0.724
+      },
+      {
+        "fpr": 0.043,
+        "tpr": 0.828
+      },
+      {
+        "fpr": 0.087,
+        "tpr": 0.865
+      },
+      {
+        "fpr": 0.109,
+        "tpr": 0.89
+      },
+      {
+        "fpr": 0.13,
+        "tpr": 0.896
+      },
+      {
+        "fpr": 0.152,
+        "tpr": 0.926
+      },
+      {
+        "fpr": 0.174,
+        "tpr": 0.945
+      },
+      {
+        "fpr": 0.196,
+        "tpr": 0.969
+      },
+      {
+        "fpr": 0.261,
+        "tpr": 0.975
+      },
+      {
+        "fpr": 0.348,
+        "tpr": 1.0
+      },
+      {
+        "fpr": 1.0,
+        "tpr": 1.0
+      }
+    ],
+    "test_size": 209
+  }
+}

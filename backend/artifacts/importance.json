@@ -1,0 +1,156 @@
+{
+  "early": [
+    {
+      "feature": "failures",
+      "importance": 0.3127,
+      "std": 0.084
+    },
+    {
+      "feature": "absences",
+      "importance": 0.1167,
+      "std": 0.0538
+    },
+    {
+      "feature": "subject",
+      "importance": 0.061,
+      "std": 0.032
+    },
+    {
+      "feature": "schoolsup",
+      "importance": 0.058,
+      "std": 0.0164
+    },
+    {
+      "feature": "higher",
+      "importance": 0.0314,
+      "std": 0.0156
+    },
+    {
+      "feature": "studytime",
+      "importance": 0.0213,
+      "std": 0.0077
+    },
+    {
+      "feature": "sex",
+      "importance": 0.018,
+      "std": 0.0037
+    },
+    {
+      "feature": "alcohol_avg",
+      "importance": 0.0133,
+      "std": 0.0081
+    },
+    {
+      "feature": "health",
+      "importance": 0.0132,
+      "std": 0.0066
+    },
+    {
+      "feature": "school",
+      "importance": 0.0108,
+      "std": 0.0048
+    },
+    {
+      "feature": "traveltime",
+      "importance": 0.0073,
+      "std": 0.0059
+    },
+    {
+      "feature": "Fjob",
+      "importance": 0.0068,
+      "std": 0.0046
+    },
+    {
+      "feature": "freetime",
+      "importance": 0.0064,
+      "std": 0.0048
+    },
+    {
+      "feature": "reason",
+      "importance": 0.0047,
+      "std": 0.0076
+    },
+    {
+      "feature": "social_score",
+      "importance": 0.0035,
+      "std": 0.0065
+    }
+  ],
+  "midterm": [
+    {
+      "feature": "G2",
+      "importance": 0.4568,
+      "std": 0.0297
+    },
+    {
+      "feature": "G1",
+      "importance": 0.3928,
+      "std": 0.0313
+    },
+    {
+      "feature": "grade_trend",
+      "importance": 0.0628,
+      "std": 0.0082
+    },
+    {
+      "feature": "subject",
+      "importance": 0.0092,
+      "std": 0.005
+    },
+    {
+      "feature": "absences",
+      "importance": 0.0057,
+      "std": 0.0031
+    },
+    {
+      "feature": "failures",
+      "importance": 0.0037,
+      "std": 0.0027
+    },
+    {
+      "feature": "famrel",
+      "importance": 0.0012,
+      "std": 0.001
+    },
+    {
+      "feature": "activities",
+      "importance": 0.0009,
+      "std": 0.0005
+    },
+    {
+      "feature": "address",
+      "importance": 0.0008,
+      "std": 0.0006
+    },
+    {
+      "feature": "Walc",
+      "importance": 0.0007,
+      "std": 0.0003
+    },
+    {
+      "feature": "romantic",
+      "importance": 0.0006,
+      "std": 0.0003
+    },
+    {
+      "feature": "famsup",
+      "importance": 0.0005,
+      "std": 0.0003
+    },
+    {
+      "feature": "Fjob",
+      "importance": 0.0005,
+      "std": 0.0015
+    },
+    {
+      "feature": "age",
+      "importance": 0.0005,
+      "std": 0.0003
+    },
+    {
+      "feature": "paid",
+      "importance": 0.0004,
+      "std": 0.0002
+    }
+  ]
+}

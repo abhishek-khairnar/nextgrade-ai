@@ -1,0 +1,178 @@
+{
+  "early": {
+    "regression": {
+      "LinearRegression": {
+        "mae": 2.632,
+        "rmse": 3.605,
+        "r2": 0.124,
+        "cv_rmse_mean": 3.426,
+        "cv_rmse_std": 0.191
+      },
+      "Ridge": {
+        "mae": 2.622,
+        "rmse": 3.592,
+        "r2": 0.13,
+        "cv_rmse_mean": 3.417,
+        "cv_rmse_std": 0.19
+      },
+      "RandomForestRegressor": {
+        "mae": 2.452,
+        "rmse": 3.432,
+        "r2": 0.206,
+        "cv_rmse_mean": 3.079,
+        "cv_rmse_std": 0.154
+      },
+      "GradientBoostingRegressor": {
+        "mae": 2.415,
+        "rmse": 3.309,
+        "r2": 0.262,
+        "cv_rmse_mean": 3.121,
+        "cv_rmse_std": 0.16
+      }
+    },
+    "classification": {
+      "LogisticRegression": {
+        "accuracy": 0.77,
+        "precision": 0.811,
+        "recall": 0.92,
+        "f1": 0.862,
+        "roc_auc": 0.731,
+        "cv_f1_mean": 0.875,
+        "cv_f1_std": 0.018
+      },
+      "RandomForestClassifier": {
+        "accuracy": 0.789,
+        "precision": 0.802,
+        "recall": 0.969,
+        "f1": 0.878,
+        "roc_auc": 0.757,
+        "cv_f1_mean": 0.875,
+        "cv_f1_std": 0.003
+      },
+      "GradientBoostingClassifier": {
+        "accuracy": 0.799,
+        "precision": 0.82,
+        "recall": 0.951,
+        "f1": 0.881,
+        "roc_auc": 0.773,
+        "cv_f1_mean": 0.87,
+        "cv_f1_std": 0.01
+      }
+    },
+    "best_regression": "RandomForestRegressor",
+    "best_classification": "RandomForestClassifier"
+  },
+  "midterm": {
+    "regression": {
+      "LinearRegression": {
+        "mae": 0.974,
+        "rmse": 1.569,
+        "r2": 0.834,
+        "cv_rmse_mean": 1.595,
+        "cv_rmse_std": 0.249
+      },
+      "Ridge": {
+        "mae": 0.973,
+        "rmse": 1.568,
+        "r2": 0.834,
+        "cv_rmse_mean": 1.588,
+        "cv_rmse_std": 0.249
+      },
+      "RandomForestRegressor": {
+        "mae": 0.852,
+        "rmse": 1.248,
+        "r2": 0.895,
+        "cv_rmse_mean": 1.53,
+        "cv_rmse_std": 0.213
+      },
+      "GradientBoostingRegressor": {
+        "mae": 0.886,
+        "rmse": 1.31,
+        "r2": 0.884,
+        "cv_rmse_mean": 1.509,
+        "cv_rmse_std": 0.165
+      }
+    },
+    "classification": {
+      "LogisticRegression": {
+        "accuracy": 0.914,
+        "precision": 0.95,
+        "recall": 0.939,
+        "f1": 0.944,
+        "roc_auc": 0.96,
+        "cv_f1_mean": 0.945,
+        "cv_f1_std": 0.015
+      },
+      "RandomForestClassifier": {
+        "accuracy": 0.928,
+        "precision": 0.94,
+        "recall": 0.969,
+        "f1": 0.955,
+        "roc_auc": 0.968,
+        "cv_f1_mean": 0.945,
+        "cv_f1_std": 0.016
+      },
+      "GradientBoostingClassifier": {
+        "accuracy": 0.919,
+        "precision": 0.951,
+        "recall": 0.945,
+        "f1": 0.948,
+        "roc_auc": 0.952,
+        "cv_f1_mean": 0.95,
+        "cv_f1_std": 0.016
+      }
+    },
+    "best_regression": "Ridge",
+    "best_classification": "GradientBoostingClassifier"
+  },
+  "best": {
+    "early": {
+      "regression": {
+        "name": "RandomForestRegressor",
+        "metrics": {
+          "mae": 2.452,
+          "rmse": 3.432,
+          "r2": 0.206,
+          "cv_rmse_mean": 3.079,
+          "cv_rmse_std": 0.154
+        }
+      },
+      "classification": {
+        "name": "RandomForestClassifier",
+        "metrics": {
+          "accuracy": 0.789,
+          "precision": 0.802,
+          "recall": 0.969,
+          "f1": 0.878,
+          "roc_auc": 0.757,
+          "cv_f1_mean": 0.875,
+          "cv_f1_std": 0.003
+        }
+      }
+    },
+    "midterm": {
+      "regression": {
+        "name": "Ridge",
+        "metrics": {
+          "mae": 0.973,
+          "rmse": 1.568,
+          "r2": 0.834,
+          "cv_rmse_mean": 1.588,
+          "cv_rmse_std": 0.249
+        }
+      },
+      "classification": {
+        "name": "GradientBoostingClassifier",
+        "metrics": {
+          "accuracy": 0.919,
+          "precision": 0.951,
+          "recall": 0.945,
+          "f1": 0.948,
+          "roc_auc": 0.952,
+          "cv_f1_mean": 0.95,
+          "cv_f1_std": 0.016
+        }
+      }
+    }
+  }
+}
