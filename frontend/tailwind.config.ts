@@ -49,6 +49,12 @@ export default {
         'soft': '0 4px 20px rgba(11, 42, 74, 0.06)',
         'soft-hover': '0 8px 30px rgba(11, 42, 74, 0.12)',
         'nav': '0 2px 12px rgba(11, 42, 74, 0.05)',
+      },
+      zIndex: {
+        navbar: '40',
+        drawer: '50',
+        modal: '60',
+        toast: '70',
       }
     },
   },
