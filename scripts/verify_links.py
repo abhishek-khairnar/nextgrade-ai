@@ -6,7 +6,8 @@ files_to_check = [
     "README.md",
     "docs/WORKFLOW.md",
     "docs/TEST_REPORT.md",
-    "docs/SUBMISSION.md"
+    "docs/SUBMISSION.md",
+    "CHANGELOG.md"
 ]
 
 all_passed = True

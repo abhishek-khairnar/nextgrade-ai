@@ -431,6 +431,60 @@ async function capture() {
     console.error('Swagger error:', e.message);
   }
 
+  // ----------------------------------------------------
+  // 42 to 44: V1.0.1 POLISH (GAUGE, STALE BANNER, BORDERLINE)
+  // ----------------------------------------------------
+  console.log('\n--- 42 to 44: v1.0.1 UI Enhancements ---');
+  try {
+    await gotoDesktop(`${BASE_URL}/predict`, 1000);
+
+    // 44: Predict Borderline Note (G1=10, G2=10 produces borderline evaluation)
+    await page.evaluate(() => {
+      window.scrollTo(0, 0);
+      function setVal(id, val) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+        setter.call(el, val);
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      setVal('G1', '10');
+      setVal('G2', '10');
+    });
+    await sleep(300);
+    const submitBtn = await page.$('button[type="submit"]');
+    if (submitBtn) await submitBtn.click();
+    await sleep(1500);
+    await page.evaluate(() => window.scrollTo(0, 160));
+    await sleep(300);
+    await take('44-predict-borderline-note.png');
+
+    // 42: Gauge Close-up (capture the rebuilt gauge component cleanly)
+    const gaugeEl = await page.$('[role="img"][aria-label*="Predicted grade"]');
+    if (gaugeEl) {
+      const targetPath = path.join(OUT_DIR, '42-gauge-closeup.png');
+      await gaugeEl.screenshot({ path: targetPath });
+      console.log(`[Captured] 42-gauge-closeup.png`);
+    }
+
+    // 43: Predict Stale Result Banner (editing inputs after prediction displays amber notice)
+    await page.evaluate(() => {
+      const el = document.getElementById('absences');
+      if (el) {
+        const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+        setter.call(el, '24');
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      window.scrollTo(0, 160);
+    });
+    await sleep(800);
+    await take('43-predict-stale-result-banner.png');
+  } catch (e) {
+    console.error('v1.0.1 shots error:', e.message);
+  }
+
   console.log('\nScreenshot suite finished successfully!');
   await browser.close();
 }
