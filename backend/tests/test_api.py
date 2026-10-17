@@ -186,3 +186,99 @@ def test_history_crud_and_export():
     r_del = client.delete(f"/api/history/{first_id}")
     assert r_del.status_code == 200
     assert r_del.json()["status"] == "deleted"
+
+def test_predict_save_false_does_not_save_history():
+    # Record initial history count
+    r_init = client.get("/api/history")
+    init_total = r_init.json()["total"]
+
+    payload = {
+        "mode": "midterm",
+        "subject": "math",
+        "studytime": 3,
+        "failures": 0,
+        "absences": 2,
+        "higher": 1,
+        "schoolsup": 0,
+        "G1": 14,
+        "G2": 14,
+        "save": False
+    }
+    resp = client.post("/api/predict", json=payload)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["id"] is None
+
+    # Verify history total did NOT change
+    r_after = client.get("/api/history")
+    assert r_after.json()["total"] == init_total
+
+    # Now verify save=True DOES save
+    payload["save"] = True
+    resp_saved = client.post("/api/predict", json=payload)
+    assert resp_saved.status_code == 200
+    data_saved = resp_saved.json()
+    assert data_saved["id"] is not None
+
+    r_after_saved = client.get("/api/history")
+    assert r_after_saved.json()["total"] == init_total + 1
+
+def test_predict_pass_probability_clipped():
+    # Very high student
+    resp_high = client.post("/api/predict", json={
+        "mode": "midterm",
+        "subject": "math",
+        "studytime": 4,
+        "failures": 0,
+        "absences": 0,
+        "higher": 1,
+        "schoolsup": 0,
+        "G1": 20,
+        "G2": 20,
+        "save": False
+    })
+    assert resp_high.status_code == 200
+    data_high = resp_high.json()
+    assert 0.01 <= data_high["pass_probability"] <= 0.99
+    assert data_high["pass_probability"] <= 0.99
+
+    # Very low student
+    resp_low = client.post("/api/predict", json={
+        "mode": "midterm",
+        "subject": "math",
+        "studytime": 1,
+        "failures": 4,
+        "absences": 30,
+        "higher": 0,
+        "schoolsup": 0,
+        "G1": 2,
+        "G2": 2,
+        "save": False
+    })
+    assert resp_low.status_code == 200
+    data_low = resp_low.json()
+    assert 0.01 <= data_low["pass_probability"] <= 0.99
+    assert data_low["pass_probability"] >= 0.01
+
+def test_predict_borderline_logic():
+    # Midterm around 10
+    resp = client.post("/api/predict", json={
+        "mode": "midterm",
+        "subject": "math",
+        "studytime": 2,
+        "failures": 0,
+        "absences": 4,
+        "higher": 1,
+        "schoolsup": 0,
+        "G1": 10,
+        "G2": 10,
+        "save": False
+    })
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "cv_rmse" in data
+    assert data["cv_rmse"] > 0
+    assert isinstance(data["is_borderline"], bool)
+    if data["is_borderline"] or data["model_disagreement"]:
+        assert data["borderline_note"] is not None
+
