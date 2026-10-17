@@ -182,6 +182,21 @@ This repository implements all mandatory pillars specified in the **AI & Machine
 - **Data Source**: Returned in JSON payload from `POST /api/predict`.
 - **Controls**: "Copy Summary" formats a markdown summary to clipboard; "Print Record" opens system print dialog.
 
+#### Rebuilt Semicircle Gauge Close-Up (v1.0.1)
+![Rebuilt Gauge Component](docs/screenshots/42-gauge-closeup.png)
+*Rebuilt clean gauge layout: separated tabular HTML score below arc, outside "Pass 10" tick label, and 3 risk bands.*
+- **What it shows**: Three distinct risk color zones (Red 0–10, Amber 10–14, Green 14–20), Pass 10 tick label outside the arc ($\ge 8\text{px}$ clearance), shortened needle with CSS rotation, and large tabular HTML grade text below the SVG preventing text collision. Clamped for all edge cases with full screen reader accessibility (`role="img"`).
+
+#### Stale Result Notification Banner (v1.0.1)
+![Stale Result Notice](docs/screenshots/43-predict-stale-result-banner.png)
+*Amber stale notification and dimmed panel when inputs change after an active prediction.*
+- **What it shows**: When a user modifies indicators following a prediction, the result card dims and an amber notice alerts: *"Inputs changed since this prediction. Generate again to update."* Clicking "Generate Prediction" refreshes the forecast and clears the notice.
+
+#### Borderline & Model Disagreement Diagnostic (v1.0.1)
+![Borderline Prediction Note](docs/screenshots/44-predict-borderline-note.png)
+*Diagnostic callout when a prediction falls within model CV RMSE error margin ($|G3 - 10| \le \text{CV RMSE}$) or when classification and regression models diverge.*
+- **What it shows**: Honest confidence messaging (*"Borderline - close to the pass mark."* or *"The two models disagree. Treat this as borderline."*), preventing false confidence on marginal students.
+
 #### Factor Attribution Bars & Suggestions
 ![Predict Factor Bars and Suggestions](docs/screenshots/09-predict-factor-bars-and-suggestions.png)
 *Point-impact feature attribution bar chart and rule-based actionable recommendations.*
@@ -624,8 +639,10 @@ When a request is submitted to `POST /api/predict`:
 3. **Pipeline Transformation**: Ingested directly into the serialized scikit-learn pipeline.
 4. **Clamping**: Raw regression outputs are clamped strictly to $[0.0, 20.0]$:
    $$\hat{y}_{\text{clamped}} = \max(0.0, \min(20.0, \hat{y}))$$
-5. **Pass Probability**: Computed from the calibrated classifier:
-   $$P(\text{Pass}) = P(G3 \ge 10 \mid \mathbf{x})$$
+5. **Pass Probability Clipping**: Computed from the calibrated classifier and clipped to the $[0.01, 0.99]$ interval (never overconfident $0\%$ or $100\%$):
+   $$P(\text{Pass}) = \min(0.99, \max(0.01, P(G3 \ge 10 \mid \mathbf{x})))$$
+6. **Borderline & Model Disagreement Evaluation**: Evaluates $|G3 - 10| \le \text{CV RMSE}$ ($3.079$ for early warning, $1.588$ for midterm). If true, flags the prediction as borderline (*"Borderline - close to the pass mark."*). If the regression estimate and classifier contradict on pass status, surfaces *"The two models disagree. Treat this as borderline."*
+7. **Selective Persistence (`save`)**: Accepts an optional boolean parameter `save: bool = true`. When set to `false` (e.g. for Home hero live demos and What-If slider simulations), SQLite database writes are completely bypassed, preventing accidental history inflation.
 
 ### Confidence Intervals & Risk Tiers
 NextGrade AI derives an **$80\%$ Gaussian confidence range** centered at the regression estimate:
@@ -723,7 +740,7 @@ The FastAPI backend provides 17 REST endpoints mounted under `/api`:
 | :--- | :--- | :--- | :--- |
 | `GET` | `/api/health` | Service health & model loading state | None |
 | `GET` | `/api/meta` | Schema ranges, categorical options & presets | None |
-| `POST` | `/api/predict` | Run single student prediction & factor attribution | `PredictRequest` (JSON) |
+| `POST` | `/api/predict` | Run single student prediction & factor attribution | `PredictRequest` (JSON, `save: bool = true`) |
 | `POST` | `/api/predict/batch` | Upload CSV for batch student screening | Multipart file, `mode` query |
 | `GET` | `/api/batch/template` | Download standardized CSV template | None |
 | `GET` | `/api/insights/summary` | Overall student count, pass rate, avg G3 | `subject` (optional) |
@@ -752,23 +769,30 @@ The FastAPI backend provides 17 REST endpoints mounted under `/api`:
   "schoolsup": 0,
   "G1": 14,
   "G2": 15,
-  "label": "Demo High-Trajectory Student"
+  "label": "Demo High-Trajectory Student",
+  "save": true
 }
 ```
 
 ### Sample Response: `POST /api/predict`
 ```json
 {
+  "id": 1,
   "predicted_g3": 14.7,
-  "pass_probability": 1.0,
-  "predicted_pass": 1,
-  "risk_level": "Low",
-  "confidence_interval": {
-    "lower": 12.7,
-    "upper": 16.7,
-    "confidence_level": 0.8
+  "predicted_g3_formatted": "14.7",
+  "confidence_range": {
+    "min": 12.7,
+    "max": 16.7
   },
+  "predicted_pass": 1,
+  "pass_probability": 0.99,
+  "risk_level": "Low",
+  "risk_label": "Low Risk",
   "mode": "midterm",
+  "cv_rmse": 1.588,
+  "is_borderline": false,
+  "model_disagreement": false,
+  "borderline_note": null,
   "factors": [
     {
       "feature": "G2",
@@ -989,21 +1013,28 @@ VITE_REPO_URL=https://github.com/abhishek-khairnar/nextgrade-ai
 ```powershell
 pytest -v
 ```
-*Expected Result:* **11 passed in ~2.2s**. Covers health check, metadata endpoints, early warning and midterm inferences, validation errors on invalid inputs, batch processing, insights endpoints, models endpoints, and history CRUD operations.
+*Expected Result:* **14 passed in ~2.3s**. Covers health check, metadata endpoints, early warning and midterm inferences, validation errors on invalid inputs, batch processing, insights endpoints, models endpoints, history CRUD operations, `save=false` history bypass test, `pass_probability` clipping to $[0.01, 0.99]$, and borderline/disagreement diagnostic logic.
 
 ### Running Frontend Tests (Vitest)
 ```powershell
 cd frontend
 npm test
 ```
-*Expected Result:* **11 passed across 3 test suites** (`format.test.ts`, `schemas.test.ts`, `components.test.tsx`).
+*Expected Result:* **18 passed across 4 test suites** (`format.test.ts`, `schemas.test.ts`, `components.test.tsx`, `gauge.test.tsx` verifying needle geometry, color zones, outside "Pass 10" tick label, and clamped edge cases).
+
+### Running End-to-End Smoke Tests (Playwright)
+```powershell
+cd frontend
+npm run test:e2e
+```
+*Expected Result:* **28 passed across 9 routes and 3 viewports** (320px mobile, 768px tablet, 1440px desktop). Asserts zero horizontal overflow (`scrollWidth <= innerWidth`), zero console errors, and verifies that clicking "Generate Prediction" creates exactly one network request, one toast notification, and one history record in SQLite.
 
 ### Production Build Validation
 ```powershell
 cd frontend
 npm run build
 ```
-*Expected Result:* Clean compilation via TypeScript compiler (`tsc`) and Vite with zero type errors.
+*Expected Result:* Clean compilation via TypeScript compiler (`tsc`) and Vite with zero type errors in ~4.8s.
 
 ---
 

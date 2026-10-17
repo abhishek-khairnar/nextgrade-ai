@@ -45,15 +45,15 @@ NextGrade AI is a production-grade machine learning web platform addressing **Ta
 - [x] **Trained Model Artifacts**: `backend/artifacts/model_early.joblib`, `model_midterm.joblib`, `metrics.json`, `importance.json`, `diagnostics.json`, `schema.json`, `insights.json`.
 - [x] **FastAPI REST API**: Comprehensive typed backend with 17 endpoints mounted under `/api/*`.
 - [x] **Frontend Web App**: Responsive single-page application across 8 primary views (`/`, `/predict`, `/batch`, `/insights`, `/models`, `/history`, `/about`, `/privacy`, `/404`).
-- [x] **Automated Test Suites**: 11 backend pytest tests and 11 frontend Vitest tests (100% passing).
+- [x] **Automated Test Suites**: 14 backend pytest tests, 18 frontend Vitest tests, and 28 Playwright E2E tests (100% passing).
 - [x] **Deployment Manifests**: `backend/render.yaml`, `frontend/vercel.json`, and `.env.example` templates.
-- [x] **Documentation**: `README.md`, `docs/WORKFLOW.md`, `docs/TEST_REPORT.md`, `docs/SUBMISSION.md`.
+- [x] **Documentation**: `README.md`, `docs/WORKFLOW.md`, `docs/TEST_REPORT.md`, `docs/SUBMISSION.md`, `CHANGELOG.md`.
 
 ---
 
 ## 3. Screenshots & Visual Artifacts
 
-The application interface was verified with 40 high-resolution PNG captures documented in `docs/screenshots/`:
+The application interface was verified with 44 high-resolution PNG captures documented in `docs/screenshots/`:
 
 | View | Screenshot Artifact | Key Features Captured |
 | :--- | :--- | :--- |
@@ -65,6 +65,9 @@ The application interface was verified with 40 high-resolution PNG captures docu
 | **Model Lab** | `docs/screenshots/21-models-summary-and-comparison.png` | Regression & classification benchmarks, scatter plots, confusion matrix, ROC-AUC |
 | **Audit History** | `docs/screenshots/26-history-table.png` | Searchable audit log, risk badge filters, detail slide-over drawer, CSV export |
 | **API Docs** | `docs/screenshots/40-swagger-api-docs.png` | FastAPI Swagger interactive documentation for all 17 REST endpoints |
+| **Gauge Closeup** | `docs/screenshots/42-gauge-closeup.png` | Rebuilt arc geometry, outside pass tick, tabular grade text, zero overlap |
+| **Stale State Banner** | `docs/screenshots/43-predict-stale-result-banner.png` | Real-time input change detection with amber update prompt and dimmed card |
+| **Borderline Diagnostic** | `docs/screenshots/44-predict-borderline-note.png` | Model CV RMSE proximity warning and classifier/regression agreement check |
 
 ---
 
@@ -88,6 +91,6 @@ Early Warning     Pass/Fail (Class) Random Forest        ROC-AUC               0
 ## 5. Verification Sign-off
 
 - **Pipeline Verification:** Automated training and inference executed without warnings.
-- **Backend Quality:** 11/11 pytest test cases passing.
-- **Frontend Quality:** 11/11 Vitest unit test cases passing; TypeScript production build compiled with zero errors.
+- **Backend Quality:** 14/14 pytest test cases passing.
+- **Frontend Quality:** 18/18 Vitest unit test cases passing; 28/28 Playwright E2E smoke tests passing; TypeScript production build compiled with zero errors.
 - **Reproducibility:** Tested via fresh virtual environment and clean browser walkthrough.

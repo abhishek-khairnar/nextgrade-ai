@@ -9,10 +9,11 @@
 ## 1. Executive Summary
 
 NextGrade AI underwent systematic end-to-end automated and manual verification:
-1. **Backend Unit & Integration Testing**: 11 pytest test cases covering REST endpoints, Pydantic v2 schemas, mode validation, batch processing, and SQLite persistence. **Result: 11 Passed (100%)**.
-2. **Frontend Unit & Component Testing**: 11 Vitest test cases covering formatting utilities, Zod conditional validation schemas, Button, Chip, and Gauge components. **Result: 11 Passed (100%)**.
-3. **End-to-End Browser Testing**: Complete browser subagent walkthrough validating all routes, responsive UI, What-if simulator reactivity, and interactive charts with video recording artifact.
-4. **Screenshot Suite**: 40 clean, high-resolution PNG captures documented in `docs/screenshots/` (all under 250 KB).
+1. **Backend Unit & Integration Testing**: 14 pytest test cases covering REST endpoints, Pydantic v2 schemas, mode validation, batch processing, SQLite persistence, history bypass, probability clipping, and borderline diagnostic logic. **Result: 14 Passed (100%)**.
+2. **Frontend Unit & Component Testing**: 18 Vitest test cases covering formatting utilities, Zod conditional validation schemas, Button, Chip, and rebuilt Gauge components. **Result: 18 Passed (100%)**.
+3. **End-to-End Automated Testing**: 28 Playwright tests across 9 routes and 3 responsive viewports, verifying zero overflow, zero console errors, and single-submit toast/DB integrity. **Result: 28 Passed (100%)**.
+4. **End-to-End Browser Walkthrough**: Complete verification validating all routes, responsive UI, What-if simulator reactivity, and interactive charts.
+5. **Screenshot Suite**: 44 clean, high-resolution PNG captures documented in `docs/screenshots/` (all under 250 KB).
 
 ---
 
@@ -120,3 +121,39 @@ The browser subagent executed a full automated session traversing the live appli
 5. **Repository URL Environment Configuration:**
    - *Issue:* Footer "Source Code" link required target repository URL.
    - *Fix:* Configured `VITE_REPO_URL=https://github.com/abhishek-khairnar/nextgrade-ai` in `frontend/.env.example` and `frontend/.env`.
+
+---
+
+## 6. UI Audit and Fixes (v1.0.1)
+
+A systematic end-to-end audit was conducted across all pages, viewports (320px, 375px, 390px, 768px, 1024px, 1280px, 1440px, 1920px), and Windows scaling factors (125%, 150%). The following 10 issues were diagnosed, resolved, and verified:
+
+| # | Issue Identified | Affected Component | Technical Resolution | Verification Status |
+|---|------------------|--------------------|----------------------|---------------------|
+| **1** | **Gauge Layout Overlap & Collision** | `frontend/src/components/charts/Gauge.tsx` | Rebuilt SVG with `viewBox="0 0 240 140"`, arc radius 90, stroke 16, centered at `(120, 125)`. Moved numeric grade and "OUT OF 20" entirely into tabular HTML below SVG. Positioned "Pass 10" tick label outside arc ($\ge 8\text{px}$ clearance). Rendered 3 distinct risk bands (Red 0–10, Amber 10–14, Green 14–20) with rounded endcaps. Shortened needle to 62px ($< 82\text{px}$ inner arc). Added `role="img"`, dynamic `aria-label`, and `motion-reduce:transition-none`. | Verified via 7 Vitest tests and screenshot `42-gauge-closeup.png` |
+| **2** | **Duplicate Toasts & Double Submit** | `frontend/src/components/ui/Toast.tsx`, `frontend/src/pages/Predict.tsx` | Implemented key-based deduplication window (1.5s), maximum 3 visible toasts, 4s auto-dismiss with hover-pause, dismiss button, and polite live region. Unified Tailwind z-index scale (navbar 40, drawer 50, modal 60, toast 70). Added `isSubmittingRef` re-entry guard and disabled button during request. Removed auto-trigger on initial page load. | Verified in Playwright test: 1 click = exactly 1 toast & 1 DB row |
+| **3** | **Stale Result with Outdated Mode** | `frontend/src/pages/Predict.tsx` | Mode and input hash are stored inside the prediction result. Result header reads mode strictly from `result.mode`. Mode toggle switch immediately clears old results and displays friendly placeholder *"Your prediction will appear here"*. Editing inputs after prediction displays amber notice *"Inputs changed since this prediction. Generate again to update."* and dims card opacity. What-If simulator uses `result.mode`. | Verified in screenshot `43-predict-stale-result-banner.png` |
+| **4** | **Overconfident Probabilities & Model Disagreement** | `backend/app/services/predictor.py`, `frontend/src/pages/Predict.tsx` | Clipped backend `pass_probability` to $[0.01, 0.99]$ (never 0% or 100%). Rounded display to integer percentage. Calculated CV RMSE margin ($3.079$ early, $1.588$ midterm): if $|G3 - 10| \le \text{CV RMSE}$, surfaces *"Borderline - close to the pass mark."* If classifier and regression diverge on pass status, surfaces *"The two models disagree. Treat this as borderline."* | Verified in backend tests and screenshot `44-predict-borderline-note.png` |
+| **5** | **Home Headline Spacing & Crowding** | `frontend/src/pages/Home.tsx` | Removed stray whitespace before punctuation marks (`"grade,"` and `"to help."`). Applied fluid clamp font size `clamp(2.25rem, 4.5vw, 3.75rem)` and two-column grid with `minmax(0, ...)` and 56px gap (`gap-12 lg:gap-14`) to prevent collision with live demo card on 1440px displays. | Verified across 320 to 1920px viewports; screenshot `01-home-hero.png` |
+| **6** | **Navbar Links Jumping Across Routes** | `frontend/src/components/layout/Navbar.tsx` | Replaced flex distribution with desktop 3-column CSS grid (`[200px_1fr_200px]`). On `/predict`, the "Predict Now" CTA button is hidden using `invisible pointer-events-none` with `tabIndex={-1}`, preserving exact action width so navigation links remain fixed in identical horizontal position. | Verified across all route switches |
+| **7** | **Accidental History Saves from Demos & Sliders** | `backend/app/routers/predict.py`, `frontend/src/pages/Home.tsx`, `frontend/src/pages/Predict.tsx` | Added `save: bool = Field(default=True)` parameter to `PredictRequest`. Home page live demo and What-If simulator calls explicitly supply `save=false`, bypassing SQLite persistence. Only user-pressed "Generate Prediction" actions create history rows. | Verified: 0 rows added on Home visits & slider manipulation |
+| **8** | **Sticky Result Panel Viewport Cutoff** | `frontend/src/pages/Predict.tsx` | Configured sticky result column with `lg:sticky lg:top-[80px] lg:max-h-[calc(100vh-96px)] lg:overflow-y-auto pr-1` so tall result panels scroll internally and never extend beyond screen viewport on small desktop/laptop screens. | Verified at 1440x900 and 1280x720 |
+| **9** | **Vitest Test Discovery Conflict** | `frontend/vite.config.ts` | Configured Vitest test include path to `src/**/*.{test,spec}.{ts,tsx}` and excluded `e2e/**` to decouple unit tests from Playwright browser automation tests. | Verified: 18 Vitest unit tests pass cleanly |
+| **10** | **Playwright Automated E2E Smoke Suite** | `frontend/e2e/smoke.spec.ts` | Implemented 28 automated Playwright tests asserting zero horizontal scroll (`scrollWidth <= innerWidth`) and zero console errors across 9 routes at 320px, 768px, and 1440px viewports, plus single-submit integrity. Added npm script `"test:e2e"`. | 28 / 28 Playwright tests passing |
+
+### Automated Test Suite Summary (v1.0.1)
+
+```text
+Backend Tests (Pytest):
+  14 passed in 2.35s (test_api.py: health, meta, early/midterm predict, batch, insights, models, history, save flag, probability clipping, borderline)
+
+Frontend Unit Tests (Vitest):
+  18 passed in 1.50s (format.test.ts, schemas.test.ts, gauge.test.tsx, components.test.tsx)
+
+Playwright E2E Smoke Tests:
+  28 passed in 37.0s (smoke.spec.ts: 9 routes x 3 viewports = 27 responsive/no-overflow checks + 1 prediction integrity check)
+
+Production Build (Vite + TypeScript):
+  tsc && vite build completed in 4.85s with 0 errors.
+```
+
